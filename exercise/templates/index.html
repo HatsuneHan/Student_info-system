@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Des</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/reset.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/index.css') }}" />
+    <link rel="stylesheet" type="text/css" href="./css/bttn.min.css" />
+</head>
+
+<body>
+    <div id="nav">
+        <ul>
+            <li>
+                <a href="./html/rsa.html" class="link" id="rsalink">RSA</a>
+            </li>
+            <li id="desli">
+                <a href="#" class="link" id="deslink">DES</a>
+            </li>
+        </ul>
+    </div>
+    <div id="main">
+        <div id="title">
+            <h1>8-round DES encoder/decoder</h1>
+        </div>
+
+        <div id="upload">
+            <p class="ptext">
+                Please upload the binary .txt file
+            </p>
+            <a href="javascript:;" class="file">Click here to upload the file
+                <input type="file" onchange="upload(this)" />
+            </a>
+        </div>
+
+
+        <div id="preview" class="normal">
+            <p class="ptext">Preview before encoding/decoding</p>
+            <textarea id="plaintext" cols="100" rows="10" style="resize:none;"></textarea>
+        </div>
+
+        <div id="key" class="normal">
+            <p class="ptext">Please input 64-bit binary cipher</p>
+            <input type="text" style="width:600px; height:20px;" id="cipher">
+        </div>
+
+        <div id="ivdiv" class="normal">
+            <p class="ptext">Please input the initial vector</p>
+            <input type="text" style="width:600px; height:20px;" id="iv">
+        </div>
+
+        <div id="operbutton" class="normal">
+            <button class="bttn-jelly bttn-md bttn-primary" onclick="encode()" id="bt1">Encode</button>
+            <button class="bttn-jelly bttn-md bttn-primary" onclick="decode()" id="bt2">Decode</button>
+        </div>
+
+        <div class="normal" id="inff">
+            <p id="inf"></p>
+        </div>
+
+        <div id="afterpreview" class="normal">
+            <p class="ptext">Preview after encoding/decoding</p>
+            <textarea id="ciphertext" cols="100" rows="10" style="resize:none;"></textarea>
+        </div>
+
+        <div id="download" class="normal">
+            <button class="bttn-jelly bttn-md bttn-primary" onclick="getans()" id="bt3">Download</button>
+        </div>
+    </div>
+
+    <div id="cr">
+        Copyright © 2020 Xiaoyu Han. All rights reserved.
+    </div>
+
+</body>
+
+<script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="./js/form.js"></script>
+<script type="text/javascript" src="./js/des.js"></script>
+<script type="text/javascript" src="./js/rsa.js"></script>
+
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
+    <link rel="stylesheet" type="text/css" href="../css/bttn.min.css" />
+</head>
+<body>
+    <div id="nav">
+        <ul>
+            <li>
+                <a href="#" class = "link" id = "rsalink">RSA</a>
+            </li>
+            <li id = "desli">
+                <a href="../index.html" class = "link" id = "deslink">DES</a>
+            </li>
+        </ul>
+    </div>
+    <div id = "main2">
+        <div id = "title">
+            <h1>RSA encoder/decoder</h1>
+            <br>
+            <h3>Get the RSA key(decimal)</h3>
+            <div id = "getnumber">
+                <div id = "random" class="normal">
+                    <button class="bttn-jelly bttn-md bttn-primary" onclick="get_cipher()" id = "bt4">get random cipher</button>
+                </div>
+
+                <div class="normal">
+                    <p class = "ptext">The following is n(public):</p>
+                    <input type="text" style="width:600px; height:20px;" class = "display" readonly = "readonly" id="outputn">
+                </div>
+
+                <div class="normal ">
+                    <p class = "ptext">The following is e(public key):</p>
+                    <input type="text" style="width:600px; height:20px;"   class = "display" readonly = "readonly" id="outpute">
+                </div>
+
+                <div class="normal ">
+                    <p class = "ptext">The following is d(private key):</p>
+                    <input type="text" style="width:600px; height:20px;"   class = "display" readonly = "readonly" id="outputd">
+                </div>
+                <br>
+                <h3>Use the public key to encode</h3>
+                <div class="normal ">
+                    <p class = "ptext">Please input the 64bit des cipher you want to be encoded by RSA:</p>
+                    <input type="text" style="width:600px; height:20px;"   class = "display" id = "rsaplaintext" >
+                </div>
+
+                <div class="normal ">
+                    <p class = "ptext">Please input value n:</p>
+                    <input type="text" style="width:600px; height:20px;"   class = "display" id = "rsanl">
+                </div>
+
+                <div class="normal ">
+                    <p class = "ptext">Please input value e:</p>
+                    <input type="text" style="width:600px; height:20px;"   class = "display" id = "rsael">
+                </div>
+
+                <div id = "operbutton2" class="normal" >
+                    <button class="bttn-jelly bttn-md bttn-primary" onclick="rsa_encode_display()" id = "bt5">Encode</button>
+                    <!--            <button class="bttn-jelly bttn-md bttn-primary" onclick="decode()" id = "bt2">Decode</button>-->
+                </div>
+
+                <div class="normal" id = "ensuccess">
+                    <p id = "infen"></p>
+                </div>
+
+                <div class="normal ">
+                    <p class = "ptext">The following is the string encoded by RSA :</p>
+                    <textarea  id="afterrsa" rows="2"  style="resize:none;width: 600px" readonly="readonly"></textarea>
+                </div>
+
+                <br>
+
+                <h3>Use the private key to decode</h3>
+                <div class="normal ">
+                    <p class = "ptext">Please input the string encoded by RSA:</p>
+                    <textarea  id="rsaciphertext" rows="2"  style="resize:none;width: 600px"></textarea>
+                </div>
+
+                <div class="normal ">
+                    <p class = "ptext">Please input value n:</p>
+                    <input type="text" style="width:600px; height:20px;"   class = "display" id = "dersanl">
+                </div>
+
+                <div class="normal ">
+                    <p class = "ptext">Please input value d:</p>
+                    <input type="text" style="width:600px; height:20px;"   class = "display" id = "dersadl">
+                </div>
+
+                <div id = "operbutton3" class="normal" >
+                    <button class="bttn-jelly bttn-md bttn-primary" onclick="rsa_decode_display(64)" id = "bt6">Decode</button>
+                    <!--            <button class="bttn-jelly bttn-md bttn-primary" onclick="decode()" id = "bt2">Decode</button>-->
+                </div>
+
+                <div class="normal" id = "desuccess">
+                    <p id = "infde"></p>
+                </div>
+
+                <div class="normal ">
+                    <p class = "ptext">The following is the des cipher decoded by RSA :</p>
+                    <input type="text" style="width:600px; height:20px;"   class = "display" id = "deafterrsa" readonly="readonly" >
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id = "cr">
+        Copyright © 2020 Xiaoyu Han. All rights reserved.
+    </div>
+
+</body>
+    <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../js/form.js"></script>
+    <script type="text/javascript" src="../js/des.js"></script>
+    <script type="text/javascript" src="../js/rsa.js"></script>
+</html>
