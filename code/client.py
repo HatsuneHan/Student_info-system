@@ -2,7 +2,7 @@ import socket
 import math
 
 HOST = '127.0.0.1'
-PORT = 8993
+PORT = 8994
 
 
 def encodesitp(func, id=None, name=None, picpath=None):
@@ -90,9 +90,11 @@ def send_add_req(id, name, picpath):
 
         finalresponse = s.recv(1024)
         if (getstate(finalresponse) == "200"):
-            print('Exit successfully!')
+            print('Add successfully!')
+        elif(getstate(finalresponse) == "400"):
+            print('Student id is repeated!')
         else:
-            print('Error!')
+            print("Error!")
 
 
 def send_del_req(id):
@@ -107,8 +109,10 @@ def send_del_req(id):
         laterresponse = s.recv(1024)
         if (getstate(laterresponse) == "200"):
             print('Del successfully!')
+        elif(getstate(laterresponse) == "404"):
+            print('Not found the student of this id!')
         else:
-            print('Error!')
+            print("error")
 
 
 def send_get_req(pageno):
@@ -150,7 +154,7 @@ def send_get_req(pageno):
             num = math.ceil(piclength / 1024)
 
             pic = str.encode("")
-            print("The file will be", piclength, "bytes")
+            # print("The file will be", piclength, "bytes")
             s.sendall(str.encode(
                 'SITP/1.0' + ' ' + '200' + ' ' + 'OK' + '\n'))
             for i in range(0, num):
@@ -162,15 +166,17 @@ def send_get_req(pageno):
             ans.write(pic)
             s.sendall(str.encode(
                 'SITP/1.0' + ' ' + '200' + ' ' + 'OK' + '\n'))
-            print("receive successfully")
+            # print("receive successfully")
             if (ctn == "0"):
-                print("get all")
+                # print("get all")
                 break
+
     while len(idArray) < 4:
         idArray.append("None")
         nameArray.append("None")
         pathArray.append(
-            "/home/hatsunehan/文档/Lesson/计算机网络/实验课/PJ/serverroot/None.png")
+            "/home/hatsunehan/文档/Lesson/计算机网络/实验课/PJ/serverroot/none.jpg")
+    print("Search successfully!")
     return [idArray, nameArray, pathArray]
 
 

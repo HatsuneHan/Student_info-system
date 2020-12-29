@@ -5,6 +5,18 @@ import math
 def add_db_handler(id, name, picpath):
     db = pymysql.connect("localhost", "hatsunehan", "qwer1234", "student")
     cursor = db.cursor()
+
+    sql_sel = "SELECT * FROM student_info WHERE id = '%s'" % (id)
+    try:
+        cursor.execute(sql_sel)
+        results = cursor.fetchall()
+        if (len(results) > 0):
+            print("Student already in db")
+            return 2
+    except:
+        print("Error: unable to fetch data")
+        return 0
+
     sql = "INSERT INTO student_info (id,name,path) VALUES('%s','%s','%s')" % (
         id, name, picpath)
     try:
@@ -20,6 +32,18 @@ def add_db_handler(id, name, picpath):
 def del_db_handler(id):
     db = pymysql.connect("localhost", "hatsunehan", "qwer1234", "student")
     cursor = db.cursor()
+
+    sql_sel = "SELECT * FROM student_info WHERE id = '%s'" % (id)
+    try:
+        cursor.execute(sql_sel)
+        results = cursor.fetchall()
+        if (len(results) == 0):
+            print("No such student")
+            return 2
+    except:
+        print("Error: unable to fetch data")
+        return 0
+
     sql = "DELETE FROM student_info WHERE id = '%s'" % (id)
     try:
         cursor.execute(sql)

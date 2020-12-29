@@ -13,6 +13,7 @@ def hello(ui):
 def upload_file(ui):
     # askopenfilename 1次上传1个；askopenfilenames1次上传多个
     selectFile = tkinter.filedialog.askopenfilename()
+    ui.delete(0, 'end')
     ui.insert(0, selectFile)
 
 

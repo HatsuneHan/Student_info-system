@@ -7,7 +7,7 @@ import sys
 import re
 from mydb import *
 HOST = '127.0.0.1'
-PORT = 8993
+PORT = 8994
 
 thread_pool = ThreadPoolManager(5)
 
@@ -39,12 +39,18 @@ def add_handler(id, name, picform, piclength, connection):
         picsec = connection.recv(1024)
         pic += picsec
     picpath = '/home/hatsunehan/文档/Lesson/计算机网络/实验课/PJ/serverroot/'+id+'.'+picform
-    ans = open(picpath, 'wb')
-    ans.write(pic)
-    connection.sendall(str.encode(
-        'SITP/1.0' + ' ' + '200' + ' ' + 'OK' + '\n'))
-    print("receive successfully")
-    add_db_handler(id, name, picpath)
+
+    if (add_db_handler(id, name, picpath) != 2):
+        ans = open(picpath, 'wb')
+        ans.write(pic)
+        ans.close()
+        print("receive successfully")
+        connection.sendall(str.encode(
+            'SITP/1.0' + ' ' + '200' + ' ' + 'OK' + '\n'))
+    else:
+        print("same id error")
+        connection.sendall(str.encode(
+            'SITP/1.0' + ' ' + '400' + ' ' + 'INCORRECT REQUEST' + '\n'))
 
 
 def del_handler(id, connection):
@@ -52,7 +58,10 @@ def del_handler(id, connection):
         connection.sendall(str.encode(
             'SITP/1.0' + ' ' + '400' + ' ' + 'Bad Request' + '\n'))
         return
-    del_db_handler(id)
+    if (del_db_handler(id) == 2):
+        connection.sendall(str.encode(
+            'SITP/1.0' + ' ' + '404' + ' ' + 'NOT FOUND' + '\n'))
+        return
     L = [x for x in os.listdir(
         '/home/hatsunehan/文档/Lesson/计算机网络/实验课/PJ/serverroot')]
     for name in L:
@@ -170,5 +179,5 @@ if __name__ == "__main__":
         connection, address = sock.accept()
         index += 1
         thread_pool.add_job(request_handler, *(index, sock, connection))
-        if index > 20:
+        if index > 100:
             break
